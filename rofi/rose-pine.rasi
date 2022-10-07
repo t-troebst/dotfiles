@@ -118,7 +118,7 @@ message {
     border:       2px dash 0px 0px ;
 }
 textbox {
-    text-color: var(foreground);
+    text-color: var(normal-foreground);
 }
 listview {
     padding:      2px 0px 0px ;
