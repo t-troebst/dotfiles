@@ -133,11 +133,11 @@ local globalkeys = gears.table.join(
         awful.client.focus.byidx(1)
     end, { description = "focus next", group = "client" }),
     awful.key({ modkey }, "k", function()
-        awful.screen.focus_relative(1)
-    end, { description = "focus the next screen", group = "screen" }),
+        awful.tag.viewnext()
+    end, { description = "next workspace", group = "screen" }),
     awful.key({ modkey }, "j", function()
-        awful.screen.focus_relative(-1)
-    end, { description = "focus the previous screen", group = "screen" }),
+        awful.tag.viewprev()
+    end, { description = "previous workspace", group = "screen" }),
 
     -- Layout manipulation
     awful.key({ modkey, "Shift" }, "l", function()
@@ -202,20 +202,7 @@ local globalkeys = gears.table.join(
     end, { description = "Run program", group = "launcher" }),
     awful.key({ modkey }, "w", function()
         awful.spawn("rofi -show window -config ~/.config/rofi/rofidmenu.rasi")
-    end, { description = "Switch to window", group = "launcher" }),
-
-    awful.key({ modkey }, "x", function()
-        awful.prompt.run({
-            prompt = "Run Lua code: ",
-            textbox = awful.screen.focused().mypromptbox.widget,
-            exe_callback = awful.util.eval,
-            history_path = awful.util.get_cache_dir() .. "/history_eval",
-        })
-    end, { description = "lua execute prompt", group = "awesome" }),
-    -- Menubar
-    awful.key({ modkey }, "p", function()
-        menubar.show()
-    end, { description = "show the menubar", group = "launcher" })
+    end, { description = "Switch to window", group = "launcher" })
 )
 
 local clientkeys = gears.table.join(
