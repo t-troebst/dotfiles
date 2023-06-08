@@ -10,11 +10,7 @@ require("awful.autofocus")
 local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
-local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
--- Enable hotkeys help widget for VIM and other apps
--- when client with a matching name is opened:
--- require("awful.hotkeys_popup.keys")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -83,6 +79,7 @@ awful.layout.layouts = {
 }
 -- }}}
 
+-- {{{ Wallpaper
 local function set_wallpaper(s)
     -- Wallpaper
     if beautiful.wallpaper then
@@ -97,19 +94,6 @@ end
 
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
-
--- Disable border on maximized windows
-screen.connect_signal("arrange", function(s)
-    local only_one = #s.tiled_clients == 1
-
-    for _, c in pairs(s.clients) do
-        if only_one and not c.floating or c.maximized then
-            c.border_width = 0
-        else
-            c.border_width = beautiful.border_width
-        end
-    end
-end)
 
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
@@ -330,7 +314,7 @@ awful.rules.rules = {
     {
         rule_any = {
             instance = {
-                "DTA",   -- Firefox addon DownThemAll.
+                "DTA", -- Firefox addon DownThemAll.
                 "copyq", -- Includes session name in class.
                 "pinentry",
             },
@@ -339,7 +323,7 @@ awful.rules.rules = {
                 "Blueman-manager",
                 "Gpick",
                 "Kruler",
-                "MessageWin",  -- kalarm.
+                "MessageWin", -- kalarm.
                 "Sxiv",
                 "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
                 "Wpa_gui",
@@ -353,9 +337,9 @@ awful.rules.rules = {
                 "Event Tester", -- xev.
             },
             role = {
-                "AlarmWindow",   -- Thunderbird's calendar.
+                "AlarmWindow", -- Thunderbird's calendar.
                 "ConfigManager", -- Thunderbird's about:config.
-                "pop-up",        -- e.g. Google Chrome's (detached) Developer Tools.
+                "pop-up", -- e.g. Google Chrome's (detached) Developer Tools.
             },
         },
         properties = { floating = true },
@@ -368,21 +352,97 @@ awful.rules.rules = {
 -- }}}
 
 -- {{{ Signals
--- Signal function to execute when a new client appears.
+
+-- Helper function to connect function to multiple signals
+local function connect_all(object, signals, fn)
+    for _, signal in ipairs(signals) do
+        object.connect_signal(signal, fn)
+    end
+end
+
+-- If there is a single non-floating window, maximize it and disable the border.
+local function update_borders_on_screen(s)
+    local should_tile = 0
+    for _, c in ipairs(s.clients) do
+        if c.maximized or not c.floating then
+            should_tile = should_tile + 1
+        end
+    end
+
+    for _, c in ipairs(s.clients) do
+        if should_tile == 1 and not c.floating then
+            c.maximized = true
+        end
+
+        if should_tile > 1 then
+            c.maximized = false
+        end
+
+        if c.maximized then
+            c.border_width = 0
+        else
+            c.border_width = beautiful.border_width
+        end
+    end
+end
+
+local function update_borders_on_client(c)
+    update_borders_on_screen(c.screen)
+end
+
+local function update_borders_on_tag(t)
+    update_borders_on_screen(t.screen)
+end
+
 client.connect_signal("manage", function(c)
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
-    if not awesome.startup then awful.client.setslave(c) end
+    if not awesome.startup then
+        awful.client.setslave(c)
+    end
 
     if awesome.startup and not c.size_hints.user_position and not c.size_hints.program_position then
         -- Prevent clients from being unreachable after screen count changes.
         awful.placement.no_offscreen(c)
     end
+
+    update_borders_on_client(c)
 end)
+
+client.connect_signal("property::floating", function(c)
+    -- Keep floating windows on top of tiling windows
+    if c.floating and not c.maximized then
+        c.ontop = true
+    else
+        c.ontop = false
+    end
+
+    update_borders_on_client(c)
+end)
+
+
+connect_all(client, {
+    "property::fullscreen",
+    "property::maximized_vertical",
+    "property::maximized_horizontal",
+    "property::minimized",
+    "property::hidden",
+    "unmanage",
+}, update_borders_on_client)
+
+client.connect_signal("property::screen", function(c, old_screen)
+    if old_screen then
+        update_borders_on_screen(old_screen)
+    end
+
+    update_borders_on_client(c)
+end)
+
+connect_all(tag, { "property::selected", "property::activated", "property::tagged" }, update_borders_on_tag)
 
 -- No sloppy focus, only focus by mouse click
 client.connect_signal("mouse::click", function(c)
-    c:emit_signal("request::activate", "mouse_enter", { raise = false })
+    c:emit_signal("request::activate", "mouse_click", { raise = false })
 end)
 
 client.connect_signal("focus", function(c)
