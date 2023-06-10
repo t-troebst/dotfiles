@@ -1,0 +1,11 @@
+layer=overlay
+font=Noto Sans 12
+background-color=#19172488
+text-color=#e0def4
+border-radius=10
+border-color=#9cefd8
+border-size=2
+default-timeout=5000
+ignore-timeout=1
+anchor=top-right
+margin=20
