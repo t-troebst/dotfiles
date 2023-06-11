@@ -5,14 +5,14 @@
     "margin": "5 5 0 5",
     // "width": 1280, // Waybar width
     // Choose the order of the modules
-    "modules-left": ["wlr/workspaces", "clock"],
+    "modules-left": ["wlr/workspaces", "clock", "tray"],
 //    "modules-center": ["hyprland/window"],
     "modules-right": ["network", "pulseaudio", "cpu", "memory", "backlight", "battery",
     "custom/powerbutton"],
 
     "custom/powerbutton": {
         "format": "",
-        "on-click": "wlogout"
+        "on-click": "wlogout -p layer-shell"
     },
 
     "network": {
