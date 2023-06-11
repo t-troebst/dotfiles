@@ -45,7 +45,7 @@
 
     "pulseaudio": {
         "format": "{volume}% {icon}",
-        "reverse-scrolling": 1,
+        "reverse-scrolling": 0,
         "format-muted": "",
         "on-click": "pavucontrol",
         "format-icons": {
