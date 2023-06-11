@@ -24,7 +24,8 @@
         "format-ethernet": "{ipaddr} ",
         "format-disconnected": "Disconnected ",
         "tooltip-format": "{bandwidthUpBytes}      {bandwidthDownBytes} ",
-        "on-click": "nm-connection-editor"
+        "on-click": "networkmanager_dmenu",
+        "on-click-right": "nm-connection-editor"
     },
 
     "wlr/workspaces": {
