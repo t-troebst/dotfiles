@@ -1,6 +1,8 @@
 # Load bash profile via foreign-env
 fenv source /etc/profile
 
+alias icat="kitty +kitten icat"
+
 function fish_greeting
     # nop
 end
