@@ -3,7 +3,7 @@
 @define-color bg rgba(25, 23, 36, 0.75);
 @define-color bg_alert rgba(235, 111, 146, 0.75);
 @define-color text_alert #191724;
-@define-color bg_hover rgba(246, 193, 119, 0.75);
+@define-color bg_hover rgba(144, 140, 170, 0.75);
 @define-color text_hover @text_alert;
 
 * {
@@ -26,12 +26,14 @@ window#waybar.hidden {
     margin-right: 8px;
     border-radius: 10px;
     transition: none;
+    font-family: Noto Mono;
     background: @bg;
 }
 
 #workspaces button {
     transition: none;
     color: @text_inactive;
+    min-width: 20px;
     background: transparent;
     padding: 5px;
     font-size: 18px;
@@ -54,6 +56,8 @@ window#waybar.hidden {
 
 #workspaces button.active {
     color: @text;
+    border-radius: inherit;
+    background: @bg_alert;
 }
 
 #window {
