@@ -1,3 +1,3 @@
 package foreign-env
-theme clearance
 theme default
+theme fishbone
