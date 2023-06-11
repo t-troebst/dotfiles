@@ -56,7 +56,7 @@ window#waybar.hidden {
 }
 
 #workspaces button.active {
-    color: @text;
+    color: @text_alert;
     border-radius: inherit;
     background: @bg_alert;
 }
