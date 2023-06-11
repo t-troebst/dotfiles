@@ -2,6 +2,7 @@
 @define-color text_inactive #908caa;
 @define-color bg rgba(25, 23, 36, 0.75);
 @define-color bg_alert rgba(235, 111, 146, 0.75);
+@define-color text_warning rgb(235, 111, 146);
 @define-color text_alert #191724;
 @define-color bg_hover rgba(144, 140, 170, 0.75);
 @define-color text_hover @text_alert;
@@ -229,19 +230,13 @@ window#waybar.hidden {
     background: @bg;
 }
 
-#battery.charging {
-    color: #ff0000;
-    background: #26A65B;
+#battery.warning:not(.plugged) {
+    background-color: @bg;
+    color: @text_warning;
 }
 
-#battery.warning:not(.charging) {
-    background-color: #ffbe61;
-    color: black;
-}
-
-#battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: @text;
+#battery.critical:not(.plugged) {
+    color: @text_warning;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -260,7 +255,6 @@ window#waybar.hidden {
 
 @keyframes blink {
     to {
-        background-color: @text;
-        color: #000000;
+        color: @text;
     }
 }
