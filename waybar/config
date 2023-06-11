@@ -18,10 +18,12 @@
     "network": {
         "interface": "wlp1s0",
         "interval": 2,
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
         "format": "{bandwidthTotalBytes}",
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{bandwidthTotalBytes} ",
+        "format-wifi": "{essid} {icon}",
+        "format-ethernet": "{ipaddr} ",
         "format-disconnected": "Disconnected ",
+        "tooltip-format": "{bandwidthUpBytes}      {bandwidthDownBytes} ",
         "on-click": "nm-connection-editor"
     },
 
