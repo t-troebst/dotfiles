@@ -1,5 +1,6 @@
 layer=overlay
 font=Noto Sans 12
+width=500
 background-color=#19172488
 text-color=#e0def4
 border-radius=10
