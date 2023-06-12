@@ -34,7 +34,7 @@ window#waybar.hidden {
 
 #workspaces button {
     transition: none;
-    color: @text_inactive;
+    color: @text;
     min-width: 20px;
     background: transparent;
     padding: 5px;
