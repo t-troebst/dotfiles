@@ -1,8 +1,9 @@
 /* Based on catpuccin theme by laymoth */
 @define-color accent #ebbcba;
+@define-color accent_t rgba(235, 188, 186, 1);
 @define-color txt #e0def4;
-@define-color bg #191724;
-@define-color bg2 #26233a;
+@define-color bg rgba(25, 23, 36, 0.75);
+@define-color bg2 rgba(38, 35, 58, 0.75);
 
  * {
     font-family: Noto Sans;
@@ -35,7 +36,8 @@
     margin: 5px;
     padding: 10px;
     border: none;
-    background-color: @bg;
+    /* background-color: @bg; */
+    background-color: rgba(0, 0, 0, 0);
     /* animation: fadeIn 0.5s ease-in-out both; */
  }
 
@@ -55,7 +57,7 @@
     margin: 5px;
     padding: 10px;
     border: none;
-    background-color: @bg;
+    background-color: rgba(0, 0, 0, 0);
  }
 
  /* Scroll */
@@ -86,7 +88,7 @@
 
  /* Selected Entry */
  #entry:selected {
-   background-color: @accent;
+   background-color: @accent_t;
  }
 
  #entry:selected #text {
