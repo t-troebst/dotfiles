@@ -1,0 +1,5 @@
+#!/bin/sh
+
+address=$(hyprctl clients -j | jq -r '.[] | ("[" + .workspace.name + "] " + .class +": " + .title + " (" + .address + ")")' | wofi --show dmenu | sed 's/.*(\(0x[0-9a-f]*\))/\1/')
+
+hyprctl dispatch focuswindow address:$address

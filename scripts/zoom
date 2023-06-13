@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# Start zoom through xwayland for compatibility
+QT_QPA_PLATFORM=xcb /usr/bin/zoom
