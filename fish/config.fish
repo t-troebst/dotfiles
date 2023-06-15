@@ -2,6 +2,9 @@
 fenv source /etc/profile
 
 alias icat="kitty +kitten icat"
+alias ls="exa -lh"
+
+set EDITOR nvim
 
 function fish_greeting
     # nop
