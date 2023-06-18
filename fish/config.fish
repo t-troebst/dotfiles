@@ -5,6 +5,7 @@ alias icat="kitty +kitten icat"
 alias ls="exa -lh"
 
 set EDITOR nvim
+set -x DIFFPROG nvim -d
 
 function fish_greeting
     # nop
