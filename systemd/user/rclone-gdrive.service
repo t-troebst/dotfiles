@@ -9,6 +9,7 @@ Type=simple
 ExecStartPre=-/usr/bin/mkdir -p "%h/Google Drive"
 ExecStart=/usr/bin/rclone mount gdrive: "%h/Google Drive"
 ExecStop=/usr/bin/fusermount -u "%h/Google Drive"
+Restart=on-failure
 RestartSec=10
 
 [Install]

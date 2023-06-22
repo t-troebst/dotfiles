@@ -9,6 +9,7 @@ Type=simple
 ExecStartPre=-/usr/bin/mkdir -p "%h/Dropbox"
 ExecStart=/usr/bin/rclone mount dropbox: "%h/Dropbox"
 ExecStop=/usr/bin/fusermount -u "%h/Dropbox"
+Restart=on-failure
 RestartSec=10
 
 [Install]
