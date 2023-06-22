@@ -1598,6 +1598,10 @@ class Expressions(Dashboard.Module):
 # XXX traceback line numbers in this Python block must be increased by 1
 end
 
+# User defaults ----------------------------------------------------------------
+
+set debuginfod enabled on
+
 # Better GDB defaults ----------------------------------------------------------
 
 # set history save
