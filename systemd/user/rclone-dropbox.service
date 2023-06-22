@@ -1,0 +1,15 @@
+[Unit]
+Description=Dropbox (rclone)
+Documentation=man:rclone(1)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStartPre=-/usr/bin/mkdir -p "%h/Dropbox"
+ExecStart=/usr/bin/rclone mount dropbox: "%h/Dropbox"
+ExecStop=/usr/bin/fusermount -u "%h/Dropbox"
+RestartSec=10
+
+[Install]
+WantedBy=default.target
