@@ -5,7 +5,7 @@
     "margin": "5 5 0 5",
     // "width": 1280, // Waybar width
     // Choose the order of the modules
-    "modules-left": ["wlr/workspaces", "clock", "tray"],
+    "modules-left": ["hyprland/workspaces", "clock", "tray"],
 //    "modules-center": ["hyprland/window"],
     "modules-right": ["network", "pulseaudio", "cpu", "memory", "backlight", "battery",
     "custom/powerbutton"],
@@ -28,7 +28,7 @@
         "on-click-right": "nm-connection-editor"
     },
 
-    "wlr/workspaces": {
+    "hyprland/workspaces": {
         "persistent_workspaces": {
             "1": [],
             "2": [],
